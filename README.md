@@ -11,3 +11,7 @@ Once postgres is setup, before this can be run in production:
 * Create a `.env` file with your `HELLO_APP_DATABASE_PASSWORD`. In order to create a random password, you can run `rails secret`.
 * Run `bundle exec rake db:create:all` to create the databases locally.
 * Don't forget to run `heroku run rails db:migrate` for migrating a new database on heroku!
+
+For testing:
+* Run `rails test` to run all tests
+* Run `bundle exec guard` in a seperate terminal window to run the tests whenever an affected file is edited
