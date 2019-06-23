@@ -6,9 +6,15 @@ class StaticPagesControllerTest < ActionDispatch::IntegrationTest
     @base_title = "Ruby on Rails Sample Application"
   end
 
-  # Let's test the Home page by issuing a GET request to the Static Pages 'home' URL
+  # Let's test the pages by issuing a GET request to the Static Pages URL
   # and then making sure we recieve a 'success' status code in response.
   # Also, test the page titles.
+  test "should get root" do
+    get static_pages_home_url
+    assert_response :success
+    assert_select "title", "Home | #{@base_title}"
+  end
+
   test "should get home" do
     get static_pages_home_url
     assert_response :success
