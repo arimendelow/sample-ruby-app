@@ -41,6 +41,36 @@ textarea {
   text-decoration: none;
 }
 
+/* Footer styling */
+footer {
+  margin-top: 45px;
+  padding-top: 5px;
+  border-top: 1px solid #eaeaea;
+  color: #777777;
+}
+
+footer a {
+  color: #555555;
+}
+
+footer a:hover {
+  color: #222222;
+}
+
+footer small {
+  float: left;
+}
+
+footer ul {
+  float: right;
+  list-style: none;
+}
+
+footer ul li {
+  float: left;
+  margin-left: 15px;
+}
+
 /* Typography rules */
 
 h1, h2, h3, h4, h5, h6 {
