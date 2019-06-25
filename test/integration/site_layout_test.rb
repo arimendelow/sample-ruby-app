@@ -10,5 +10,6 @@ class SiteLayoutTest < ActionDispatch::IntegrationTest
     assert_select "a[href=?]", help_path, count: 2 # count: 2 for the nav bar and footer
     assert_select "a[href=?]", contact_path, count: 2 # count: 2 for the nav bar and footer
     assert_select "a[href=?]", about_path, count: 2 # count: 2 for the nav bar and footer
+    assert_select "a[href=?]", signup_path
   end
 end
