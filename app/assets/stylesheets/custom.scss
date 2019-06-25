@@ -8,9 +8,14 @@ $gray-medium-light: #eaeaea;
 /* Universal styling */
 
 /* Look here for the Boostrap variables: https://getbootstrap.com/docs/3.4/customize/ */
-
+html {
+ height: 100%;
+}
 body {
+  height: 100%;
   padding-top: 60px;
+  display: flex!important;
+  flex-direction: column!important;
 }
 
 section {
@@ -48,8 +53,9 @@ textarea {
 
 /* Footer styling */
 footer {
-  margin-top: 45px;
-  padding-top: 5px;
+  margin-top: auto!important;
+  padding-bottom: 1rem;
+  padding-top: 1rem;
   border-top: 1px solid $gray-medium-light;
   color: $gray-light;
   a {
