@@ -1,7 +1,13 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+/* Variables, etc. */
+$gray-hover-color: #d5dde1;
+$gray-medium-light: #eaeaea;
+
 /* Universal styling */
+
+/* Look here for the Boostrap variables: https://getbootstrap.com/docs/3.4/customize/ */
 
 body {
   padding-top: 60px;
@@ -29,13 +35,13 @@ textarea {
   float: left;
   margin-right: 10px;
   font-size: 1.7em;
-  color: #ffffff;
+  color: white;
   text-transform: uppercase;
   letter-spacing: -1px;
   padding-top: 9px;
   font-weight: bold;
   &:hover {
-    color: #d5dde1;
+    color: $gray-hover-color;
     text-decoration: none;
   }
 }
@@ -44,12 +50,12 @@ textarea {
 footer {
   margin-top: 45px;
   padding-top: 5px;
-  border-top: 1px solid #eaeaea;
-  color: #777777;
+  border-top: 1px solid $gray-medium-light;
+  color: $gray-light;
   a {
-    color: #555555;
+    color: $gray;
     &:hover {
-      color: #222222;
+      color: $gray-darker;
     }
   }
   small {
@@ -84,7 +90,7 @@ h2 {
   margin-bottom: 30px;
   text-align: center;
   font-weight: normal;
-  color: #777777;
+  color: $gray-light;
 }
 
 p {
