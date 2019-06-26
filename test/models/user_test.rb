@@ -2,6 +2,7 @@ require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
   
+  # Called before every single test - 'teardown' is called every every test
   def setup
     @user = User.new(name: "Example User", email: "test@email.com")
   end
@@ -19,12 +20,10 @@ class UserTest < ActiveSupport::TestCase
   test "email should be present" do
     @user.email = "     "
     assert_not @user.valid?
-    @user.email = "test@email.com"
   end
 
   test "email should be a valid email structure" do
     @user.email = "missing at sign, has spaces, missing the domain extention"
     assert_not @user.valid?
-    @user.email = "test@email.com"
   end
 end
