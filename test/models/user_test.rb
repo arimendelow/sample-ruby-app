@@ -27,7 +27,15 @@ class UserTest < ActiveSupport::TestCase
     assert_not @user.valid?
   end
 
-  test "email should be a valid email structure" do
+  test "email validation should accept valid addresses" do
+    valid_addresses = %w[user@test.com USER@bar.CO A-e_mm123@foo.bar.biz first.last@man.jp pat+pam@baz.co.il]
+    valid_addresses.each do |valid_address|
+      @user.email = valid_address
+      assert @user.valid?, "#{valid_address.inspect} should be valid"
+    end
+  end
+
+  test "email validation should reject an invalid email structure" do
     @user.email = "missing at sign, has spaces, missing the domain extention"
     assert_not @user.valid?
   end
