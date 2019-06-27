@@ -36,10 +36,10 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test "email validation should reject invalid addresses" do
-    invalid_addresses = %w[user@test,com USERbar.CO A-e_mm123@foo.bar. first.last@ @baz.co.il pat+pam@baz+bar.co.il]
+    invalid_addresses = %w[user.@test.com .user@test.com user@@test.com user@test,com USERbar.CO foo@bar..com foo@-bar.com foo@.bar.com A-e_mm123@foo.bar. first.last@ @baz.co.il pat+pam@baz+bar.co.il]
     invalid_addresses.each do |invalid_address|
       @user.email = invalid_address
-      assert @user.valid?, "#{invalid_address.inspect} should be invalid"
+      assert_not @user.valid?, "#{invalid_address.inspect} should be invalid"
     end
   end
 
@@ -49,7 +49,7 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test "email should not be too long" do
-    @user.email = "a" * 244 + "@test.com"
+    @user.email = "a" * 255 + "@test.com"
     assert_not @user.valid?
   end
 end
