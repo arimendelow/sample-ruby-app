@@ -5,6 +5,8 @@ ruby '2.3.7'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.3'
+# Hashing function for password storage/validation
+gem 'bcrypt'
 # Add boostrap, for style
 gem 'bootstrap-sass'
 # Use postgresql as the database for Active Record
