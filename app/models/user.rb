@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  # Ensure that all emails are stored in lowercase
+  before_save { self.email = self.email.downcase }
   validates :name, presence: true, length: { maximum: 50 }
 
   # A constant, indicated in Ruby by a name starting with a capital letter
