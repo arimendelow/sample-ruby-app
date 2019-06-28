@@ -4,7 +4,7 @@ class UserTest < ActiveSupport::TestCase
   
   # Called before every single test - 'teardown' is called every every test
   def setup
-    @user = User.new(name: "Example User", email: "test@email.com")
+    @user = User.new(name: "Example User", email: "test@email.com", password: "foobar", password_confirmation:"foobar")
   end
 
   test "should be valid" do
