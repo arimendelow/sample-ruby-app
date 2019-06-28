@@ -23,6 +23,7 @@ class User < ApplicationRecord
   # /             end of regex
   # i             case insensitive
   #
-  # Check here for regex rules: https://rubular.comokayokaodkfsokafdsofd
+  # Check here for regex rules: https://rubular.com
 
+  has_secure_password
 end
