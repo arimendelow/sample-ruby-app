@@ -3,7 +3,7 @@ class User < ApplicationRecord
 
   # A constant, indicated in Ruby by a name starting with a capital letter
   VALID_EMAIL_REGEX = /\A(\w+)([\w+\-.]+)(\w+)(@)([a-z\d]+)([a-z\d\-\.]+)([a-z\d]+)(\.)([a-z]+)\z/i
-  validates :email, presence: true, length: { maximum: 255 }, format: { with: VALID_EMAIL_REGEX }
+  validates :email, presence: true, length: { maximum: 255 }, format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false } # Rails infirs that uniqueness should be true in addition to case insensitive
 
   # Explaining that email regex:
   # /             start of regex
@@ -21,6 +21,6 @@ class User < ApplicationRecord
   # /             end of regex
   # i             case insensitive
   #
-  # Check here for regex rules: https://rubular.com
+  # Check here for regex rules: https://rubular.comokayokaodkfsokafdsofd
 
 end
