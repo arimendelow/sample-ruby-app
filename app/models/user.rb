@@ -25,5 +25,10 @@ class User < ApplicationRecord
   #
   # Check here for regex rules: https://rubular.com
 
+  # This method adds the following functionality:
+  # - The ability to saved a hashed password_digest attribute to the database
+  # - A pair of virtual attributes (password and password_confirmation), including presnce validations upon object creation and a validation requiring that they match
+  # - An 'authenticate' method that returns the user when the password is correct (and 'false' otherwise)
+  # The only requirement for this method to work is for the model to have an attribute called 'password_digest'
   has_secure_password
 end
