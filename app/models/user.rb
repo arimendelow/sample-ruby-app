@@ -31,4 +31,5 @@ class User < ApplicationRecord
   # - An 'authenticate' method that returns the user when the password is correct (and 'false' otherwise)
   # The only requirement for this method to work is for the model to have an attribute called 'password_digest'
   has_secure_password
+  validates :password, presence: true, length: { minimum: 8 }
 end
