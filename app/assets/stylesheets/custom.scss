@@ -129,6 +129,23 @@ input {
   height: auto !important;
 }
 
+#error_explanation {
+  ul {
+    list-style-type: none;
+    margin-left: -40px; // Decrease the indentation
+  }
+}
+
+// Rails automatically wraps the form fields with errors in divs with the CSS class 'field_with_errors'
+// This will make any field with an error red
+.field_with_errors {
+  // Extend the bootstrap class 'has-error'
+  @extend .has-error;
+  .form-control {
+    color: $state-danger-text;
+  }
+}
+
 /* Typography rules */
 
 h1, h2, h3, h4, h5, h6 {
