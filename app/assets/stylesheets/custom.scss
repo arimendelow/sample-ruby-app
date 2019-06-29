@@ -1,9 +1,16 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
-/* Variables, etc. */
+/* Variables, mixins, etc. */
 $gray-hover-color: #d5dde1;
 $gray-medium-light: #eaeaea;
+
+@mixin box_sizing {
+  -moz-box-sizing:    border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing:         border-box;
+
+}
 
 /* Universal styling */
 
@@ -102,4 +109,14 @@ h2 {
 p {
   font-size: 1.1em;
   line-height: 1.7em;
+}
+
+/* misc */
+
+.debug_dump {
+  clear: both;
+  float: left;
+  width: 100%;
+  margin-top: 45px;
+  @include box_sizing;
 }
