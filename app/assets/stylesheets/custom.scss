@@ -116,6 +116,19 @@ footer {
   }
 }
 
+/* Forms */
+
+input, textarea, select, .uneditable-input {
+  border: 1px solid #bbbbbb;
+  width: 100%;
+  margin-bottom: 15px;
+  @include box_sizing;
+}
+
+input {
+  height: auto !important;
+}
+
 /* Typography rules */
 
 h1, h2, h3, h4, h5, h6 {
