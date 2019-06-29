@@ -1,1 +1,6 @@
-<%= @user.name %>, <%= @user.email %>, <%= @user.created_at %>, <%= @user.updated_at %>
+<% provide(:title, @user.name) %>
+<h1>
+  <!-- The 'gravatar_for' method lives in users_helper.rb -->
+  <%= gravatar_for @user %> 
+  <%= @user.name %>
+</h1>
