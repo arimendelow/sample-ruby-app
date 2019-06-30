@@ -1,9 +1,24 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
-/* Variables, etc. */
+/* Variables, mixins, etc. */
 $gray-hover-color: #d5dde1;
 $gray-medium-light: #eaeaea;
+
+@mixin box_sizing {
+  -moz-box-sizing:    border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing:         border-box;
+
+}
+
+.nopadding-right {
+  padding-right: 0 !important;
+}
+
+.nopadding {
+  padding: 0 !important;
+}
 
 /* Universal styling */
 
@@ -34,7 +49,7 @@ textarea {
 }
 
 
-/* Header styling */
+/* Header */
 
 #logo {
   float: left;
@@ -51,7 +66,39 @@ textarea {
   }
 }
 
-/* Footer styling */
+/* Sidebar */
+aside {
+  section.user_info {
+    margin-top: 20px;
+  }
+  section {
+    padding: 10px 0; // First value is top, second is right
+    margin-top: 20px;
+    &:first-child {
+      border: 0;
+      padding-top: 0;
+    }
+    span {
+      display: block;
+      margin-bottom: 3px;
+      line-height: 1;
+    }
+    h1 {
+      font-size: 1.4em;
+      text-align: left;
+      letter-spacing: -1px;
+      margin-bottom: 3px;
+      margin-top: 0px;
+    }
+  }
+}
+
+.gravatar {
+  float: left;
+  margin-right: 10px;
+}
+
+/* Footer */
 footer {
   margin-top: auto!important;
   padding-bottom: 1rem;
@@ -74,6 +121,40 @@ footer {
       float: left;
       margin-left: 15px;
     }
+  }
+}
+
+/* Forms */
+
+input, textarea, select, button, .uneditable-input {
+  border: 1px solid #bbbbbb;
+  // width: auto;
+  margin-bottom: 15px !important;
+  @include box_sizing;
+}
+
+label {
+  margin-top: 15px;
+}
+
+input {
+  height: auto !important;
+}
+
+#error_explanation {
+  ul {
+    list-style-type: none;
+    margin-left: -40px; // Decrease the indentation
+  }
+}
+
+// Rails automatically wraps the form fields with errors in divs with the CSS class 'field_with_errors'
+// This will make any field with an error red
+.field_with_errors {
+  // Extend the bootstrap class 'has-error'
+  @extend .has-error;
+  .form-control {
+    color: $state-danger-text;
   }
 }
 
@@ -102,4 +183,14 @@ h2 {
 p {
   font-size: 1.1em;
   line-height: 1.7em;
+}
+
+/* misc */
+
+.debug_dump {
+  clear: both;
+  float: left;
+  width: 100%;
+  margin-top: 45px;
+  @include box_sizing;
 }
