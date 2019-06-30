@@ -7,18 +7,22 @@
       <%= render 'shared/error_messages' %>
 
       <%= form.label :name %>
-      <%= form.text_field :name, class: 'form-control' %>
+      <%= form.text_field :name, placeholder: 'name', class: 'form-control' %>
 
       <%= form.label :email %>
-      <%= form.email_field :email, class: 'form-control' %>
+      <%= form.email_field :email, placeholder: 'email', class: 'form-control' %>
 
       <%= form.label :password %>
-      <%= form.password_field :password, class: 'form-control' %>
+      <div class="row">
+        <div class="col-sm-11 nopadding-right">
+          <%= form.password_field :password, placeholder: 'password', class: 'form-control', id: 'password_field' %>
+        </div>
+        <div class="col-sm-1 nopadding">
+          <%= button_tag "Show", type: 'button', id: 'toggle_password', class: "btn btn-secondary" %>
+        </div>
+      </div>
 
-      <%= form.label :password_confirmation, "Confirmation" %>
-      <%= form.password_field :password_confirmation, class: 'form-control'  %>
-
-      <%= form.submit "Create my account", class: "btn btn-primary" %>
+      <%= form.submit "Create my account", class: "btn btn-primary btn-block" %>
     <% end %>
   </div>
 </div>

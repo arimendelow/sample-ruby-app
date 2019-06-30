@@ -12,6 +12,14 @@ $gray-medium-light: #eaeaea;
 
 }
 
+.nopadding-right {
+  padding-right: 0 !important;
+}
+
+.nopadding {
+  padding: 0 !important;
+}
+
 /* Universal styling */
 
 /* Look here for the Boostrap variables: https://getbootstrap.com/docs/3.4/customize/ */
@@ -118,11 +126,15 @@ footer {
 
 /* Forms */
 
-input, textarea, select, .uneditable-input {
+input, textarea, select, button, .uneditable-input {
   border: 1px solid #bbbbbb;
-  width: 100%;
-  margin-bottom: 15px;
+  // width: auto;
+  margin-bottom: 15px !important;
   @include box_sizing;
+}
+
+label {
+  margin-top: 15px;
 }
 
 input {
