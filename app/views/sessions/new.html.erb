@@ -1,2 +1,27 @@
-<h1>Sessions#new</h1>
-<p>Find me in app/views/sessions/new.html.erb</p>
+<% provide(:title, "Log In") %>
+<h1>Log In!</h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for(:session, url: login_path) do |form| %>
+      <%= render 'shared/error_messages' %>
+
+      <%= form.label :email %>
+      <%= form.email_field :email, placeholder: 'email', class: 'form-control' %>
+
+      <%= form.label :password %>
+      <div class="row">
+        <div class="col-sm-11 nopadding-right">
+          <%= form.password_field :password, placeholder: 'password', class: 'form-control', id: 'password_field' %>
+        </div>
+        <div class="col-sm-1 nopadding">
+          <%= button_tag "Show", type: 'button', id: 'toggle_password', class: "btn btn-secondary" %>
+        </div>
+      </div>
+
+      <%= form.submit "Log In", class: "btn btn-primary btn-block" %>
+    <% end %>
+
+    <p>New user? <%= link_to "Sign up now!", signup_path %></p>
+  </div>
+</div>
