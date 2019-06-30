@@ -8,5 +8,6 @@ window.onload = ->
   if (document.getElementById('toggle_password') == null) then return
   document.getElementById('toggle_password').onclick = ->
     passfield = document.querySelector('#password_field')
+    console.log("toggling password!")
     if (passfield.type == 'password') then (passfield.type = 'text') else (passfield.type = 'password')
     return
