@@ -9,8 +9,11 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:session][:password])
       # Log in and redirect to the user's show page
     else
-      # Create an error message
+      # Use '.now', which is specifically designed for displaying flash messages on rendered pages
+      # The contents of flash.now disappear as soon as there is an additional request
+      flash.now[:danger] = "Invalid email/password combination"
       render 'new'
+    end
   end
 
   def destroy
