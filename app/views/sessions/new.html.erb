@@ -1,16 +1,10 @@
-<% provide(:title, "Sign Up") %>
-<h1>Sign up!</h1>
-
+<% provide(:title, "Log In") %>
+<h1>Log In!</h1>
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
-    <%= form_for(@user, url: signup_path) do |form| %>
+    <%= form_for(:session, url: login_path) do |form| %>
       <!-- Make this note the togglePassword function in assets/javascripts/users.coffee -->
       <%= javascript_tag "window.togglePassword()" %> 
-      <%= render 'shared/error_messages' %>
-
-      <%= form.label :name %>
-      <%= form.text_field :name, placeholder: 'name', class: 'form-control' %>
-
       <%= form.label :email %>
       <%= form.email_field :email, placeholder: 'email', class: 'form-control' %>
 
@@ -24,7 +18,9 @@
         </div>
       </div>
 
-      <%= form.submit "Create my account", class: "btn btn-primary btn-block" %>
+      <%= form.submit "Log In", class: "btn btn-primary btn-block" %>
     <% end %>
+
+    <p>New user? <%= link_to "Sign up now!", signup_path %></p>
   </div>
 </div>

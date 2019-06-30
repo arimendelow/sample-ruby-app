@@ -14,6 +14,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
+      log_in @user # The 'log_in' function is in 'helpers/sessions_helper.rb'
       flash[:success] = "Welcome to Ari's Sample App!"
       redirect_to @user
     else

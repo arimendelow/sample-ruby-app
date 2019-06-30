@@ -2,7 +2,8 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-window.onload = ->
+window.togglePassword = () ->
+  console.log("here!")
   # Function for toggling the visibilty of the password in a form
   # Need to check if the element is found first, else it'll throw an error as it'll be setting onclick of null
   if (document.getElementById('toggle_password') == null) then return

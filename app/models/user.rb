@@ -32,4 +32,10 @@ class User < ApplicationRecord
   # The only requirement for this method to work is for the model to have an attribute called 'password_digest'
   has_secure_password
   validates :password, presence: true, length: { minimum: 8 }
+
+  # Returns the hash digest of the given string using the minimum cost parameter in tests and a normal (high) cost parameter in production
+  def User.digest(string)
+    cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
+    BCrypt::Password.create(string, cost: cost)
+  end
 end
