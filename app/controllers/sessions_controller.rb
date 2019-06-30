@@ -7,7 +7,8 @@ class SessionsController < ApplicationController
     user = User.find_by(email: params[:session][:email].downcase)
     # If the user exists AND the password is correct...
     if user && user.authenticate(params[:session][:password])
-      # Log in and redirect to the user's show page
+      log_in user # Rails converts this to the route for the user's profile page (user_url(user))
+      redirect_to user
     else
       # Use '.now', which is specifically designed for displaying flash messages on rendered pages
       # The contents of flash.now disappear as soon as there is an additional request
