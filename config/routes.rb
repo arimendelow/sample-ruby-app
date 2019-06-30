@@ -7,6 +7,6 @@ Rails.application.routes.draw do
   post   '/signup'     ,to: 'users#create'
   get     '/login'     ,to: 'sessions#new'
   post    '/login'     ,to: 'sessions#create'
-  delete  '/logout'    ,to: 'sessions#destory'
+  delete  '/logout'    ,to: 'sessions#destroy'
   resources :users # Need this for CRUD operations on a given user - see the CRUD table for the provided actions
 end
