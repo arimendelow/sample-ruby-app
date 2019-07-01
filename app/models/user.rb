@@ -38,13 +38,13 @@ class User < ApplicationRecord
   validates :password, presence: true, length: { minimum: 8 }
 
   # Returns the hash digest of the given string using the minimum cost parameter in tests and a normal (high) cost parameter in production
-  def User.digest(string)
+  def self.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
     BCrypt::Password.create(string, cost: cost)
   end
 
   # Returns a random base64 token
-  def User.new_token
+  def self.new_token
     SecureRandom.urlsafe_base64
   end
 
