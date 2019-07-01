@@ -18,6 +18,11 @@
         </div>
       </div>
 
+      <%= form.label :remember_me, class: "checkbox inline" do %>
+        <%= f.check_box :remember_me %>
+        <span>Keep me logged in</span>
+      <% end %>
+
       <%= form.submit "Log In", class: "btn btn-primary btn-block" %>
     <% end %>
 
