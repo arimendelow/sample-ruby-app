@@ -1,4 +1,8 @@
 class User < ApplicationRecord
+  # Creates getter and setter methods corresponding to a user's 'remember_token'
+  # This allows us to get and set a @remember_token instance variable
+  attr_acessor :remember_token
+
   # Ensure that all emails are stored in lowercase
   before_save { self.email = self.email.downcase }
   validates :name, presence: true, length: { maximum: 50 }
@@ -42,5 +46,11 @@ class User < ApplicationRecord
   # Returns a random base64 token
   def User.new_token
     SecureRandom.urlsafe_base64
+  end
+
+  # Remembers a user in the database for user in persistent sessions (staying logged in when the window is closed)
+  def remember
+    self.remember_token = User.new_token
+    update_attribute(:remember_digest, User.digest(remember_token))
   end
 end
