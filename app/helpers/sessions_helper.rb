@@ -23,10 +23,16 @@ module SessionsHelper
     # forever and ever. With both, that person can only log in until the user logs out.
   end
 
-  # Returns the current logged in user
+  # Returns the user corresponding to either the current session, or the remember token cookie
   def current_user
-    if session[:user_id]
-      @current_user ||= User.find_by(id: session[:user_id])
+    if (user_id = session[:user_id])
+      @current_user ||= User.find_by(id: user_id)
+    elsif (user_id = cookies.signed[:user_id])
+      user = User.find_by(id: user_id)
+      if user && user.authenticated?(cookies[:remember_token])
+        log_in user
+        @current_user = user
+      end
     end
   end
 
