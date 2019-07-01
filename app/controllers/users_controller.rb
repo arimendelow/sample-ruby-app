@@ -22,6 +22,10 @@ class UsersController < ApplicationController
     end
   end
 
+  def edit
+    @user = User.find(params[:id])
+  end
+
   private
     # Returns a version of the 'params' hash with ONLY the permitted attributes, and raises an error if the :user attribute is missing
     def user_params
