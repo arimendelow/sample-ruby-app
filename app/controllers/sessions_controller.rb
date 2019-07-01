@@ -10,7 +10,8 @@ class SessionsController < ApplicationController
       # Rails converts 'user' to the route for the user's profile page (user_url(user))
       # 'log_in' and 'remember' are helper functions
       log_in user
-      remember user
+      # Handle the submission of the 'remember me' checkbox on the login page
+      params[:session][:remember_me] == '1' ? remember(user) : forget(user)
       redirect_to user
     else
       # Use '.now', which is specifically designed for displaying flash messages on rendered pages
