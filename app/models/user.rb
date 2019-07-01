@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   # Creates getter and setter methods corresponding to a user's 'remember_token'
   # This allows us to get and set a @remember_token instance variable
-  attr_acessor :remember_token
+  attr_accessor :remember_token
 
   # Ensure that all emails are stored in lowercase
   before_save { self.email = self.email.downcase }
