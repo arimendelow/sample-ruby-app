@@ -26,6 +26,15 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
+  def update
+    @user = User.find(params[:id])
+    if @user.update_attributes(user_params)
+      # Handle a successful update
+    else
+      render 'edit'
+    end
+  end
+
   private
     # Returns a version of the 'params' hash with ONLY the permitted attributes, and raises an error if the :user attribute is missing
     def user_params
