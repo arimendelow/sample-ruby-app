@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
       log_in user
       # Handle the submission of the 'remember me' checkbox on the login page
       params[:session][:remember_me] == '1' ? remember(user) : forget(user)
-      redirect_to user
+      redirect_back_or_to user # This is a sessions helper for forwarding users to the requested page after logging in
     else
       # Use '.now', which is specifically designed for displaying flash messages on rendered pages
       # The contents of flash.now disappear as soon as there is an additional request
