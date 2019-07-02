@@ -1,30 +1,13 @@
 <% provide(:title, "Sign Up") %>
-<h1>Sign up!</h1>
 
+<!-- For the form -->
+<% provide(:submit_url, signup_path) %>
+<% provide(:button_text, "Make my account") %>
+
+<h1>Sign up!</h1>
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
-    <%= form_for(@user, url: signup_path) do |form| %>
-      <!-- Make this note the togglePassword function in assets/javascripts/users.coffee -->
-      <%= javascript_tag "window.togglePassword()" %> 
-      <%= render 'shared/error_messages' %>
-
-      <%= form.label :name %>
-      <%= form.text_field :name, placeholder: 'name', class: 'form-control' %>
-
-      <%= form.label :email %>
-      <%= form.email_field :email, placeholder: 'email', class: 'form-control' %>
-
-      <%= form.label :password %>
-      <div class="row">
-        <div class="col-sm-11 nopadding-right">
-          <%= form.password_field :password, placeholder: 'password', class: 'form-control', id: 'password_field' %>
-        </div>
-        <div class="col-sm-1 nopadding">
-          <%= button_tag "Show", type: 'button', id: 'toggle_password', class: "btn btn-secondary" %>
-        </div>
-      </div>
-
-      <%= form.submit "Create my account", class: "btn btn-primary btn-block" %>
-    <% end %>
+    <!-- Render the form template partial -->
+    <%= render 'form' %>
   </div>
 </div>
