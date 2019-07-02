@@ -4,6 +4,7 @@ class UsersEditTest < ActionDispatch::IntegrationTest
   
   def setup
     @user = users(:ari)
+    log_in_as(@user)
   end
 
   test "failed edit" do
