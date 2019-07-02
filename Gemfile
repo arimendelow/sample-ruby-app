@@ -33,6 +33,9 @@ gem 'jquery-rails', '~> 4.3', '>= 4.3.3'
 gem 'rails-ujs', '~> 0.1.0'
 gem 'bootstrap'
 
+# Allow us to make semi-realistic sample users
+gem 'faker'
+
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
