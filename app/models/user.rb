@@ -35,7 +35,11 @@ class User < ApplicationRecord
   # - An 'authenticate' method that returns the user when the password is correct (and 'false' otherwise)
   # The only requirement for this method to work is for the model to have an attribute called 'password_digest'
   has_secure_password
-  validates :password, presence: true, length: { minimum: 8 }
+  # 'allow_nil: true' means that the password fields can be empty.
+  # This both allows the update page to not require a user to enter their password,
+  # and avoids a duplicate error message on the signup page of "password is missing"
+  # as 'has_secure_password' already includes a seperate presence validation that specifically catches nil passwords
+  validates :password, presence: true, length: { minimum: 8 }, allow_nil: true
 
   # Returns the hash digest of the given string using the minimum cost parameter in tests and a normal (high) cost parameter in production
   def self.digest(string)
