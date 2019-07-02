@@ -53,8 +53,10 @@ class UsersController < ApplicationController
         redirect_to login_url
       end
     end
+
     def correct_user
       @user = User.find(params[:id])
-      redirect_to(root_url) unless @user == current_user
+      # In addition to the syntax in the above method, if we're only running one command we can put the 'unless' statement on a single line
+      redirect_to(root_url) unless current_user?(@user)
     end
 end
