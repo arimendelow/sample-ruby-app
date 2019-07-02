@@ -43,6 +43,12 @@ class UsersController < ApplicationController
     end
   end
 
+  def destroy
+    User.find(params[:id]).destory
+    flash[:success] = "User #{User.find(params[:id]).name} deleted."
+    redirect_to users_url
+  end
+
   private
     # Returns a version of the 'params' hash with ONLY the permitted attributes, and raises an error if the :user attribute is missing
     def user_params
