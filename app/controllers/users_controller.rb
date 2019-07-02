@@ -1,4 +1,7 @@
 class UsersController < ApplicationController
+  # Restrict the filters to act only on the :edit and :update actions
+  before_action :logged_in_user,  only: [:edit, :update]
+  before_action :correct_user,    only: [:edit, :update]
 
   def show
     @user = User.find(params[:id])
@@ -22,9 +25,39 @@ class UsersController < ApplicationController
     end
   end
 
+  def edit
+    @user = User.find(params[:id])
+  end
+
+  def update
+    @user = User.find(params[:id])
+    if @user.update_attributes(user_params)
+      flash[:success] = "Profile Updated!"
+      redirect_to @user
+    else
+      render 'edit'
+    end
+  end
+
   private
     # Returns a version of the 'params' hash with ONLY the permitted attributes, and raises an error if the :user attribute is missing
     def user_params
       params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    end
+
+    # Before filters - for using with the 'before_action' command 
+    # to arrange for a particular method to be called before the given actions
+    def logged_in_user
+      unless logged_in?
+        store_location # Store the website that the user is trying to access - this function is a sessions helper
+        flash[:danger] = "You need to log in to access this page."
+        redirect_to login_url
+      end
+    end
+
+    def correct_user
+      @user = User.find(params[:id])
+      # In addition to the syntax in the above method, if we're only running one command we can put the 'unless' statement on a single line
+      redirect_to(root_url) unless current_user?(@user)
     end
 end
