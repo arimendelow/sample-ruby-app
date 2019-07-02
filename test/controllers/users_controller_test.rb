@@ -4,7 +4,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
 
   def setup
     @user = users(:ari)
-    @user2 = users(:hamm)
+    @other_user = users(:hamm)
   end
 
   test "should get new" do
@@ -30,21 +30,21 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should redirect from edit to root when logged in as the wrong user" do
-    log_in_as(@user2)
-    get edit_user_path(@user)
-    assert_not flash.empty?
+    log_in_as(@user)
+    get edit_user_path(@other_user)
+    assert flash.empty?
     assert_redirected_to root_url
   end
 
   test "should redirect from update to root when logged in as the wrong user" do
-    log_in_as(@user2)
-    patch user_path(@user), params: {
+    log_in_as(@user)
+    patch user_path(@other_user), params: {
       user: {
-        name: @user.name,
-        email: @user.email,
+        name: @other_user.name,
+        email: @other_user.email,
       }
     }
-    assert_not flash.empty?
+    assert flash.empty?
     assert_redirected_to root_url
   end
 end
