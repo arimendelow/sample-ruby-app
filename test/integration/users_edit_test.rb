@@ -33,9 +33,9 @@ class UsersEditTest < ActionDispatch::IntegrationTest
         password_confirmation: "",
       }
     }
-    # No error message?
+    # Make sure we get some message from 'flash'
     assert_not flash.empty?
-    
+
     assert_redirected_to @user
 
     # Reload the user's values from the DB and confirm that they were successfully updated
