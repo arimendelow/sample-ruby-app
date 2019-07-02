@@ -41,4 +41,13 @@ class UsersController < ApplicationController
     def user_params
       params.require(:user).permit(:name, :email, :password, :password_confirmation)
     end
+
+    # Before filters - for using with the 'before_action' command 
+    # to arrange for a particular method to be called before the given actions
+    def logged_in_user
+      unless logged_in?
+        flash[:danger] = "You need to log in to access this page."
+        redirect_to login_url
+      end
+    end
 end
