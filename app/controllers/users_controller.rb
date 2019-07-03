@@ -1,7 +1,12 @@
 class UsersController < ApplicationController
   # Restrict the filters to act only on the :edit and :update actions
-  before_action :logged_in_user,  only: [:edit, :update]
+  before_action :logged_in_user,  only: [:edit, :update, :index, :destroy]
   before_action :correct_user,    only: [:edit, :update]
+  before_action :admin_user,    only: :destroy
+
+  def index
+    @users = User.paginate(page: params[:page])
+  end
 
   def show
     @user = User.find(params[:id])
@@ -39,6 +44,13 @@ class UsersController < ApplicationController
     end
   end
 
+  def destroy
+    user_name = User.find(params[:id]).name
+    User.find(params[:id]).destroy
+    flash[:success] = "User #{user_name} deleted."
+    redirect_to users_url
+  end
+
   private
     # Returns a version of the 'params' hash with ONLY the permitted attributes, and raises an error if the :user attribute is missing
     def user_params
@@ -55,9 +67,15 @@ class UsersController < ApplicationController
       end
     end
 
+    # For making sure that a user is only trying to edit himself
     def correct_user
       @user = User.find(params[:id])
       # In addition to the syntax in the above method, if we're only running one command we can put the 'unless' statement on a single line
       redirect_to(root_url) unless current_user?(@user)
+    end
+
+    # Confirms an admin user
+    def admin_user
+      redirect_to(root_url) unless current_user.admin?
     end
 end
