@@ -5,6 +5,10 @@ class User < ApplicationRecord
 
   # Ensure that all emails are stored in lowercase
   before_save :downcase_email
+
+  # For email activation
+  before_create :create_activation_digest
+
   validates :name, presence: true, length: { maximum: 50 }
 
   # A constant, indicated in Ruby by a name starting with a capital letter
@@ -74,5 +78,10 @@ class User < ApplicationRecord
     # Converts email to lowercase
     def downcase_email
       self.email = email.downcase
+    end
+
+    def create_activation_digest
+      self.activation_token = User.new_token
+      self.activation_digest = User.digest(activation_token)
     end
 end
