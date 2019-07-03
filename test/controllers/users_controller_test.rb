@@ -81,4 +81,13 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     end
     assert_redirected_to root_url
   end
+
+  test "should allow deletion of a user when logged in as an admin" do
+    log_in_as(@user)
+    assert @user.admin?
+    assert_difference 'User.count', -1 do
+      delete user_path(@other_user)
+    end
+    assert_redirected_to users_path
+  end
 end
