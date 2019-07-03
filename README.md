@@ -15,3 +15,8 @@ Once postgres is setup, before this can be run in production:
 For testing:
 * Run `rails test` to run all tests
 * Run `bundle exec guard` in a seperate terminal window to run the tests whenever an affected file is edited
+
+To reset the database in Heroku:
+* Run `heroku pg:reset DATABASE` and then `heroku run rails db:migrate`
+
+To seed the test data from `db/seeds,rb`, run `run rails db:seed`
