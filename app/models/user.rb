@@ -4,7 +4,7 @@ class User < ApplicationRecord
   attr_accessor :remember_token
 
   # Ensure that all emails are stored in lowercase
-  before_save { self.email = self.email.downcase }
+  before_save :downcase_email
   validates :name, presence: true, length: { maximum: 50 }
 
   # A constant, indicated in Ruby by a name starting with a capital letter
@@ -68,4 +68,11 @@ class User < ApplicationRecord
   def forget
     update_attribute(:remember_digest, nil)
   end
+
+  private
+
+    # Converts email to lowercase
+    def downcase_email
+      self.email = email.downcase
+    end
 end
