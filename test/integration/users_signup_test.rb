@@ -36,7 +36,8 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
     end
     # Verify that exactly 1 message was delivered
     assert_equal 1, ActionMailer::Base.deliveries.size
-    # 'assigns' lets us access instance variables in the in the corresponding action
+    # 'assigns' is a hash that contains all the instance variables that would be available to a view
+    # at this point. It offers easy access to the state of the given variable at this point in the test.
     user = assigns(:user)
     assert_not user.activated?
 
