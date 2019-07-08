@@ -17,6 +17,7 @@ class SessionsController < ApplicationController
       else
         flash[:warning] = "Account not activated. Please check your email for the activation link."
         redirect_to root_url
+      end
     else
       # Use '.now', which is specifically designed for displaying flash messages on rendered pages
       # The contents of flash.now disappear as soon as there is an additional request
