@@ -31,6 +31,11 @@ Rails.application.configure do
   # Store uploaded files on the local file system in a temporary directory
   config.active_storage.service = :test
 
+  # Set the test domain's host
+  # config.action_mailer.default_url_options = { host: 'example.com' }
+  # The above does not work, for some reason. Use:
+  Rails.application.routes.default_url_options[:host] = "example.com"
+
   config.action_mailer.perform_caching = false
 
   # Tell Action Mailer not to deliver emails to the real world.
