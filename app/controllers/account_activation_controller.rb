@@ -4,9 +4,7 @@ class AccountActivationController < ApplicationController
     user = User.find_by(email: params[:email])
     # If the user exists, but is not activated, and the correct activation token is passed in...
     if user && !user.activated? && user.authenticated?(:activation, params[:id])
-      # Activate the user
-      user.update_attribute(:activated, true)
-      user.update_attribute(:activated_at, Time.zone.now)
+      user.activate
       # Log the user in
       log_in user
       flash[:success] = "Account activated!"
