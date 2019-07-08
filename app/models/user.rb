@@ -63,9 +63,15 @@ class User < ApplicationRecord
   end
 
   # Returns true if the given token matches the digest
-  def authenticated?(remember_token)
-    return false if remember_digest.nil?
-    BCrypt::Password.new(remember_digest).is_password?(remember_token)
+  def authenticated?(attribute, token)
+    # 'send' lets us call a method with a name of our choice by "sending" a message to a given object
+    # It sends whatever we pass in to that object instance and its ancestors in the class
+    # hierarchy until some method reacts - 
+    # meaning that it 'has the same name'.
+    # So this is really just a way of calling 'digest.activate_token' or 'digest.remember_token', etc.
+    digest = send("#{attribute}_digest")
+    return false if digest.nil?
+    BCrypt::Password.new(digest).is_password?(token)
   end
 
   # For logging out a user
