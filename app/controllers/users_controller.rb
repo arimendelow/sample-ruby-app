@@ -10,10 +10,17 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
-    # If the user is not yet activated, return to the root and notify the user
-    if @user.activated? != true
-      flash[:warning] = "This account has not been activated."
+    # If the user exists...
+    if User.exists?(params[:id])
+      @user = User.find(params[:id])
+      # If the user is not yet activated, return to the root and notify the user
+      if @user.activated? != true
+        flash[:warning] = "This account has not been activated."
+        redirect_to root_url
+      end
+    # Otherwise, notify the user that this account does not exist
+    else
+      flash[:warning] = "This account does not exist."
       redirect_to root_url
     end
   end
