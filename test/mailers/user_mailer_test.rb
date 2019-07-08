@@ -2,8 +2,6 @@ require 'test_helper'
 
 class UserMailerTest < ActionMailer::TestCase
 
-  # This test throws the following error: "ActionView::Template::Error: Missing host to link to! Please provide the :host parameter, set default_url_options[:host], or set :only_path to true"
-  # even though we DO set that host URL. Need to look more into why it's thrown. Per Google, seems to be a widespread issue. Commenting out, for now.
   test "account_activation" do
     user = users(:ari)
     user.activation_token = User.new_token
