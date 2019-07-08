@@ -73,6 +73,7 @@ group :test do
   gem 'minitest-reporters'
   gem 'guard'
   gem 'guard-minitest'
+  # Brings back 'assigns' to controller tests and 'assert_template' to both controller and integration tests, as they have been deprecated as of Rails 5.
   gem 'rails-controller-testing'
 end
 

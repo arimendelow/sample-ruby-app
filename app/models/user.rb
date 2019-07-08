@@ -1,10 +1,14 @@
 class User < ApplicationRecord
   # Creates getter and setter methods corresponding to a user's 'remember_token'
   # This allows us to get and set a @remember_token instance variable
-  attr_accessor :remember_token
+  attr_accessor :remember_token, :activation_token
 
   # Ensure that all emails are stored in lowercase
-  before_save { self.email = self.email.downcase }
+  before_save :downcase_email
+
+  # For email activation
+  before_create :create_activation_digest
+
   validates :name, presence: true, length: { maximum: 50 }
 
   # A constant, indicated in Ruby by a name starting with a capital letter
@@ -59,13 +63,43 @@ class User < ApplicationRecord
   end
 
   # Returns true if the given token matches the digest
-  def authenticated?(remember_token)
-    return false if remember_digest.nil?
-    BCrypt::Password.new(remember_digest).is_password?(remember_token)
+  def authenticated?(attribute, token)
+    # 'send' lets us call a method with a name of our choice by "sending" a message to a given object
+    # It sends whatever we pass in to that object instance and its ancestors in the class
+    # hierarchy until some method reacts - 
+    # meaning that it 'has the same name'.
+    # So this is really just a way of calling 'digest.activate_token' or 'digest.remember_token', etc.
+    digest = send("#{attribute}_digest")
+    return false if digest.nil?
+    BCrypt::Password.new(digest).is_password?(token)
+  end
+
+  # Activate the user
+  def activate
+    update_columns(
+      activated: true,
+      activated_at: Time.zone.now,
+    )
+  end
+
+  def send_activation_email
+    UserMailer.account_activation(self).deliver_now
   end
 
   # For logging out a user
   def forget
     update_attribute(:remember_digest, nil)
   end
+
+  private
+
+    # Converts email to lowercase
+    def downcase_email
+      self.email = email.downcase
+    end
+
+    def create_activation_digest
+      self.activation_token = User.new_token
+      self.activation_digest = User.digest(activation_token)
+    end
 end

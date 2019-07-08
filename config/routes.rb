@@ -8,5 +8,7 @@ Rails.application.routes.draw do
   get     '/login'     ,to: 'sessions#new'
   post    '/login'     ,to: 'sessions#create'
   delete  '/logout'    ,to: 'sessions#destroy'
-  resources :users # Need this for CRUD operations on a given user - see the CRUD table for the provided actions
+  # Need this for CRUD operations on a given user - see the CRUD table for the provided actions
+  resources :users
+  resources :account_activation, only: [:edit]
 end
