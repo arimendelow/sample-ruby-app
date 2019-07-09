@@ -1,7 +1,7 @@
 class User < ApplicationRecord
-  # Creates getter and setter methods corresponding to a user's 'remember_token'
+  # Creates getter and setter methods corresponding to a user's 'remember_token' etc
   # This allows us to get and set a @remember_token instance variable
-  attr_accessor :remember_token, :activation_token
+  attr_accessor :remember_token, :activation_token, :reset_token
 
   # Ensure that all emails are stored in lowercase
   before_save :downcase_email
@@ -84,6 +84,18 @@ class User < ApplicationRecord
 
   def send_activation_email
     UserMailer.account_activation(self).deliver_now
+  end
+
+  # For resetting a user's password
+  def create_reset_digest
+    self.reset_token = User.new_token
+    update_attribute(:reset_digest, User.digest(reset_token))
+    update_attribute(:reset_sent_at, Time.zone.now)
+  end
+
+  # Send the password reset email
+  def send_password_reset_email
+    UserMailer.password_reset(self).deliver_now
   end
 
   # For logging out a user
