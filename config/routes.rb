@@ -13,5 +13,5 @@ Rails.application.routes.draw do
   # Need this for CRUD operations on a given user - see the CRUD table for the provided actions
   resources :users
   resources :account_activation,  only: [:edit]
-  resources :password_resets,     only: [:new, :create:, :edit, :update]
+  resources :password_resets,     only: [:new, :create, :edit, :update]
 end
