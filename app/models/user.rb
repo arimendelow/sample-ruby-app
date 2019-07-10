@@ -98,6 +98,11 @@ class User < ApplicationRecord
     UserMailer.password_reset(self).deliver_now
   end
 
+  # Check if a password reset request has expired - returns a boolean value
+  def password_reset_expired?
+    # "The password reset was sent earlier than two hours ago."
+    reset_sent_at < 2.hours.ago
+
   # For logging out a user
   def forget
     update_attribute(:remember_digest, nil)
