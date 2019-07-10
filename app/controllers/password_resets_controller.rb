@@ -36,6 +36,7 @@ class PasswordResetsController < ApplicationController
     # Case 3
     elsif @user.update_attributes(user_params)
       log_in @user
+      @user.update_attribute(:reset_digest, nil) # Clear the reset digest so that the link no longer works
       flash[:success] = "Your password has been reset."
       redirect_to @user
     # Case 4
