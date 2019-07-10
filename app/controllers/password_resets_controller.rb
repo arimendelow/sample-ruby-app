@@ -21,6 +21,15 @@ class PasswordResetsController < ApplicationController
   def edit
   end
 
+  # Four possible cases for the update action:
+  #   1) Expired password reset
+  #   2) Failed update due to invalid pass
+  #   3) Failed update due to an empty password and confirmation - this one's tricky because it'll initially look successful
+  #   4) Successful update (yay!)
+  def update
+
+  end
+
   private
 
     def get_user
