@@ -1,2 +1,28 @@
-<h1>PasswordResets#edit</h1>
-<p>Find me in app/views/password_resets/edit.html.erb</p>
+<% provide(:title, "Reset Password") %>
+<h1>Reset Your Password!</h1>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for(@user, url: password_resets_path(params[:id])) do |form| %>
+      <!-- Make this note the togglePassword function in assets/javascripts/users.coffee -->
+      <%= javascript_tag "window.togglePassword()" %> 
+
+      <%= render 'shared/error_messages' %>
+
+      <!-- Because the 'edit' action needs the email for finding the user, we're including it (but not changing it) on the form so that it's submitted along with the form - the form gets this information from the password reset link that the user was sent, but after the form is submitted, if we don't do this, the value will be lost -->
+      <!-- Note that we use 'hidden_field_tag' instead of 'form.hidden_field_tag' because the reset link puts the email in 'params[:email]', and the latter would put it in 'params[:user][:email]' -->
+      <%= hidden_field_tag :email, @user.email %>
+
+      <%= form.label :password %>
+      <div class="row">
+        <div class="col-sm-11 nopadding-right">
+          <%= form.password_field :password, placeholder: 'password', class: 'form-control', id: 'password_field' %>
+        </div>
+        <div class="col-sm-1 nopadding">
+          <%= button_tag "Show", type: 'button', id: 'toggle_password', class: "btn btn-secondary" %>
+        </div>
+      </div>
+
+      <%= form.submit "Update Password", class: "btn btn-primary btn-block" %>
+    <% end %>
+  </div>
+</div>
