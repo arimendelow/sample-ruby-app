@@ -1,6 +1,7 @@
 class PasswordResetsController < ApplicationController
   before_action :get_user,    only: [:edit, :update]
   before_action :valid_user,  only: [:edit, :update]
+  before_action :check_exp,   only: [:edit, :update] # Update case 1
 
   def new
   end
@@ -44,6 +45,14 @@ class PasswordResetsController < ApplicationController
               @user.authenticated?(:reset, params[:id])
              )
         redirect_to root_url
+      end
+    end
+
+    # Checks the expriration of the reset token
+    def check_exp
+      if @user.password_reset_expired?
+        flash[:danger] = "This password reset link has expired, as it was sent over two hours ago."
+        redirect_to new_password_reset_url
       end
     end
 
