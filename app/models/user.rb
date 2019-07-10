@@ -102,6 +102,7 @@ class User < ApplicationRecord
   def password_reset_expired?
     # "The password reset was sent earlier than two hours ago."
     reset_sent_at < 2.hours.ago
+  end
 
   # For logging out a user
   def forget
