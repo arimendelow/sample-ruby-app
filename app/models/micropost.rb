@@ -1,7 +1,7 @@
 class Micropost < ApplicationRecord
   belongs_to :user
   # Order the microposts by most recent first
-  # Could also do 'order('created_at DESC'), which is raw SQL
+  # Could also do 'order('created_at DESC')', which is raw SQL
   # '->' is called a 'stabby lambda'
   # It takes in a block and returns a Proc, which can then be evaluated with the 'call' method
   default_scope -> { order(created_at: :desc) }
