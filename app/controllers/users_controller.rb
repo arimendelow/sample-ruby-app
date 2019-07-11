@@ -18,6 +18,8 @@ class UsersController < ApplicationController
         flash[:warning] = "This account has not been activated."
         redirect_to root_url
       end
+      # Else, load up the user's microposts (with pagination):
+      @microposts = @user.microposts.paginate(page: params[:page])
     # Otherwise, notify the user that this account does not exist
     else
       flash[:warning] = "This account does not exist."
