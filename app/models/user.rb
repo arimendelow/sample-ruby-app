@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  has_many :microposts
   # Creates getter and setter methods corresponding to a user's 'remember_token' etc
   # This allows us to get and set a @remember_token instance variable
   attr_accessor :remember_token, :activation_token, :reset_token
