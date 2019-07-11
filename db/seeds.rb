@@ -30,11 +30,11 @@ User.create!(
     activated: true,
     activated_at: Time.zone.now,
   )
+end
 
 # Create microposts for the first 6 users from above
 users = User.order(:created_at).take(6)
 50.times do
   content = Faker::Lorem.sentence(5)
-  users.each { |user| user.micropost.create!(content:content) }
-
+  users.each { |user| user.microposts.create!(content:content) }
 end
