@@ -28,3 +28,8 @@
 
 # Ignore the Spring files to prevent conflicts between Spring and Git when using Guard
 /spring/*.pid
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
