@@ -110,6 +110,13 @@ class User < ApplicationRecord
     update_attribute(:remember_digest, nil)
   end
 
+  # Defines a feed of microposts
+  def feed
+    # The ? ensures that 'id' is properly escaped before being included in hte underlying SQL query, avoiding a security hole called SQL injection
+    # ID here is just an integer, so there's no danger of SQL injection, but it's a good habit to always escape variables injected into SQL statements
+    Micropost.where("user_id = ?", id)
+  end
+
   private
 
     # Converts email to lowercase
