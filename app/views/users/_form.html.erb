@@ -1,7 +1,7 @@
 <%= form_for(@user, url: yield(:submit_url)) do |form| %>
   <!-- Make this note the togglePassword function in assets/javascripts/users.coffee -->
   <%= javascript_tag "window.togglePassword()" %> 
-  <%= render 'shared/error_messages', object: form.object %>
+  <%= render 'shared/error_messages' %>
 
   <%= form.label :name %>
   <%= form.text_field :name, placeholder: 'name', class: 'form-control' %>
