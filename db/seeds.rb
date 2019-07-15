@@ -6,6 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+# Create one admin example user
 User.create!(
   name: "Example User",
   email: "test@example.com",
@@ -16,6 +17,7 @@ User.create!(
   activated_at: Time.zone.now,
 )
 
+# Create 99 random example users
 99.times do |n|
   name = Faker::Name.name
   email = "example-#{n + 1}@railstutorial.org"
@@ -28,4 +30,11 @@ User.create!(
     activated: true,
     activated_at: Time.zone.now,
   )
+end
+
+# Create microposts for the first 6 users from above
+users = User.order(:created_at).take(6)
+50.times do
+  content = Faker::Lorem.sentence(5)
+  users.each { |user| user.microposts.create!(content:content) }
 end

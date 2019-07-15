@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  # 'dependent: :destroy' ensures that if a user is deleted, so are his corresponding microposts
+  has_many :microposts, dependent: :destroy
   # Creates getter and setter methods corresponding to a user's 'remember_token' etc
   # This allows us to get and set a @remember_token instance variable
   attr_accessor :remember_token, :activation_token, :reset_token
@@ -106,6 +108,13 @@ class User < ApplicationRecord
   # For logging out a user
   def forget
     update_attribute(:remember_digest, nil)
+  end
+
+  # Defines a feed of microposts
+  def feed
+    # The ? ensures that 'id' is properly escaped before being included in hte underlying SQL query, avoiding a security hole called SQL injection
+    # ID here is just an integer, so there's no danger of SQL injection, but it's a good habit to always escape variables injected into SQL statements
+    Micropost.where("user_id = ?", id) # Could also just write 'microposts'
   end
 
   private

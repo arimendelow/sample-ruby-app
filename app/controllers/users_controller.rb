@@ -18,6 +18,8 @@ class UsersController < ApplicationController
         flash[:warning] = "This account has not been activated."
         redirect_to root_url
       end
+      # Else, load up the user's microposts (with pagination):
+      @microposts = @user.microposts.paginate(page: params[:page])
     # Otherwise, notify the user that this account does not exist
     else
       flash[:warning] = "This account does not exist."
@@ -69,13 +71,6 @@ class UsersController < ApplicationController
 
     # Before filters - for using with the 'before_action' command 
     # to arrange for a particular method to be called before the given actions
-    def logged_in_user
-      unless logged_in?
-        store_location # Store the website that the user is trying to access - this function is a sessions helper
-        flash[:danger] = "You need to log in to access this page."
-        redirect_to login_url
-      end
-    end
 
     # For making sure that a user is only trying to edit himself
     def correct_user
