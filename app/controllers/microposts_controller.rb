@@ -6,7 +6,9 @@ class MicropostsController < ApplicationController
     if @micropost.save
       flash[:success] = "Micropost created!"
       redirect_to root_url
+    # If it's an invalid micropost (ie no content)...
     else
+      @feed_items = current_user.feed.paginate(page: params[:page])
       render 'static_pages/home'
     end
   end
