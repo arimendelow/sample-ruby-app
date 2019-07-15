@@ -6,7 +6,7 @@
       <!-- Make this note the togglePassword function in assets/javascripts/users.coffee -->
       <%= javascript_tag "window.togglePassword()" %> 
 
-      <%= render 'shared/error_messages' %>
+      <%= render 'shared/error_messages', object: form.object %>
 
       <!-- Because the 'edit' action needs the email for finding the user, we're including it (but not changing it) on the form so that it's submitted along with the form - the form gets this information from the password reset link that the user was sent, but after the form is submitted, if we don't do this, the value will be lost -->
       <!-- Note that we use 'hidden_field_tag' instead of 'form.hidden_field_tag' because the reset link puts the email in 'params[:email]', and the latter would put it in 'params[:user][:email]' -->
