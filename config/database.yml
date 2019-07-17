@@ -80,8 +80,9 @@ test:
 #
 production:
   <<: *default
-  host: 'aa1cy4h91zuxgyq.crun4mdkqgky.us-east-1.rds.amazonaws.com'
-  port: '5432'
-  database: sample-app_production
-  username: postgres
+  encoding: unicode
+  database: <%= ENV['RDS_DB_NAME'] %>
+  username: <%= ENV['RDS_USERNAME'] %>
   password: <%= ENV['RDS_PASSWORD'] %>
+  host: <%= ENV['RDS_HOSTNAME'] %>
+  port: <%= ENV['RDS_PORT'] %>
