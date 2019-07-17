@@ -80,7 +80,6 @@ test:
 #
 production:
   <<: *default
-  adapter: postgres
   host: 'aa1cy4h91zuxgyq.crun4mdkqgky.us-east-1.rds.amazonaws.com'
   port: '5432'
   database: sample-app_production
