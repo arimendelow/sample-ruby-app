@@ -88,7 +88,8 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :ses # Configured in config/initializers/amazon_ses.rb
   host = 'http://rails-sample-production.mnmsgae6r4.us-east-1.elasticbeanstalk.com/'
   config.action_mailer.default_url_options = { host: host }
-  
+
+  # This did not work. Use the above
   # config.action_mailer.smtp_settings = {
   #   address: "email-smtp.us-east-1.amazonaws.com",
   #   user_name: ENV["SES_SMTP_USERNAME"], #Your SMTP user
