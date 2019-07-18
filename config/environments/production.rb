@@ -88,7 +88,9 @@ Rails.application.configure do
 
   # mailer = Aws::SES::Mailer.new(:access_key => "AKIAIHIURD7GO5THTYYA", :secret_key => "BLZMZSlPzcMD0RALWNY45/zpFpJ4cgdPs6Uw35KusknJ")
   config.action_mailer.delivery_method = :aws_sdk
-  
+  host = 'http://rails-sample-production.mnmsgae6r4.us-east-1.elasticbeanstalk.com/'
+  config.action_mailer.default_url_options = { host: host }
+
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   # config.action_mailer.raise_delivery_errors = false
