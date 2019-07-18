@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
         log_in user
         # Handle the submission of the 'remember me' checkbox on the login page
         params[:session][:remember_me] == '1' ? remember(user) : forget(user)
-        redirect_back_or_to user # This is a sessions helper for forwarding users to the requested page after logging in
+        redirect_back_or_to root_url # This is a sessions helper for forwarding users to the requested page after logging in
       else
         flash[:warning] = "Account not activated. Please check your email for the activation link."
         redirect_to root_url

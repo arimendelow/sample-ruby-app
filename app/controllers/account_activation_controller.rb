@@ -20,7 +20,7 @@ class AccountActivationController < ApplicationController
       Rails.logger.info "User already activated!"
       if logged_in?
         flash[:info] = "Account already activated!"
-        redirect_to user
+        redirect_to root_url
       else
         flash[:warning] = "Account already activated, please log in!"
         redirect_to login_url
