@@ -24,6 +24,7 @@ class AccountActivationController < ApplicationController
       else
         flash[:warning] = "Account already activated, please log in!"
         redirect_to login_url
+      end
     else
       Rails.logger.info "Something went wrong with the account activation."
       # Otherwise, whatever was passed in as the activation token must not be correct, so notify the user
