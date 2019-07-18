@@ -68,6 +68,7 @@ module SessionsHelper
 
   # Redirects to the stored location (or to the default)
   def redirect_back_or_to(default)
+    Rails.logger.info "Friendly forwarding!"
     redirect_to(session[:forwarding_url] || default)
     session.delete(:forwarding_url)
   end
