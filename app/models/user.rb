@@ -81,6 +81,7 @@ class User < ApplicationRecord
     update_columns(
       activated: true,
       activated_at: Time.zone.now,
+      activation_digest: nil,
     )
   end
 

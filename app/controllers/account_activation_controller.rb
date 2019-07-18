@@ -16,12 +16,11 @@ class AccountActivationController < ApplicationController
       Rails.logger.info "Redirecting to the user's profile!"
       redirect_to user
     # if the user IS already activated
-    elsif user && user.activated? && user.authenticated?(:activation, params[:id])
+    elsif user && user.activated?
       Rails.logger.info "User already activated!"
       log_in user
-      flash[:info] = "Account already activated!"
-      Rails.logger.info "Redirecting to the user's profile!"
-      redirect_to user
+      flash[:info] = "Account already activated, please log in!"
+      redirect_to login_url
     else
       Rails.logger.info "Something went wrong with the account activation."
       # Otherwise, whatever was passed in as the activation token must not be correct, so notify the user
