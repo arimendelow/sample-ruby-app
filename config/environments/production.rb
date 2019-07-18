@@ -85,21 +85,17 @@ Rails.application.configure do
   # }
 
   # Configuration for using SES in production
-
-  # mailer = Aws::SES::Mailer.new(:access_key => "AKIAIHIURD7GO5THTYYA", :secret_key => "BLZMZSlPzcMD0RALWNY45/zpFpJ4cgdPs6Uw35KusknJ")
-  config.action_mailer.delivery_method = :aws_sdk
+  config.action_mailer.delivery_method = :ses # Configured in config/initializers/amazon_ses.rb
   host = 'http://rails-sample-production.mnmsgae6r4.us-east-1.elasticbeanstalk.com/'
   config.action_mailer.default_url_options = { host: host }
-
-  config.action_mailer.smtp_settings = {
-    address: "email-smtp.us-east-1.amazonaws.com",
-    user_name: 'AKIARXFWRJ7E3SBS7BDR', #Your SMTP user
-    # user_name: ENV["SES_SMTP_USERNAME"], #Your SMTP user
-    password: 'wsbzGtw7NM670TfcBZTbIKBlnj4fdLil4AbMkTbR', #Your SMTP password
-    # password: ENV["SES_SMTP_PASSWORD"], #Your SMTP password
-    authentication: :login,
-    enable_starttls_auto: true
-  }
+  
+  # config.action_mailer.smtp_settings = {
+  #   address: "email-smtp.us-east-1.amazonaws.com",
+  #   user_name: ENV["SES_SMTP_USERNAME"], #Your SMTP user
+  #   password: ENV["SES_SMTP_PASSWORD"], #Your SMTP password
+  #   authentication: :login,
+  #   enable_starttls_auto: true
+  # }
 
   # Set to false by default
   config.action_mailer.perform_deliveries = true
