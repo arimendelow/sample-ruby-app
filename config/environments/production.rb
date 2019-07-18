@@ -85,7 +85,7 @@ Rails.application.configure do
   # }
 
   # Configuration for using SES in production
-  mailer = AmazonSes::Mailer.new(:access_key => "AKIAIHIURD7GO5THTYYA", :secret_key => "BLZMZSlPzcMD0RALWNY45/zpFpJ4cgdPs6Uw35KusknJ")
+  mailer = Aws::SES.new(:access_key => "AKIAIHIURD7GO5THTYYA", :secret_key => "BLZMZSlPzcMD0RALWNY45/zpFpJ4cgdPs6Uw35KusknJ")
   config.action_mailer.delivery_method = mailer
 
   # Ignore bad email addresses and do not raise email delivery errors.

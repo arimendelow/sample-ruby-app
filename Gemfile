@@ -40,6 +40,9 @@ gem 'faker'
 gem 'will_paginate'
 gem 'bootstrap-will_paginate'
 
+# For the mailer
+gem 'aws-sdk-ses'
+
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
