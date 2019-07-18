@@ -38,7 +38,7 @@ class PasswordResetsController < ApplicationController
       log_in @user
       # If the user has not already been activated, activate them
       if !@user.activated?
-        user.activate
+        @user.activate
       end
       @user.update_attribute(:reset_digest, nil) # Clear the reset digest so that the link no longer works
       flash[:success] = "Your password has been reset."
