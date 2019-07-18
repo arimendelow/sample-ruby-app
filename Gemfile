@@ -41,7 +41,7 @@ gem 'will_paginate'
 gem 'bootstrap-will_paginate'
 
 # For the mailer
-gem 'aws-sdk-ses'
+gem 'aws-sdk-rails'
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
