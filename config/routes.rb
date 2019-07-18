@@ -10,10 +10,9 @@ Rails.application.routes.draw do
   get     '/login'                          ,to: 'sessions#new'
   post    '/login'                          ,to: 'sessions#create'
   delete  '/logout'                         ,to: 'sessions#destroy'
-  get     '/account_activation/:id/edit'    ,to: 'account_activation#edit'
   # Need this for CRUD operations on a given user - see the CRUD table for the provided actions
   resources :users
-  # resources :account_activation,  only: [:edit]
+  resources :account_activation,  only: [:edit]
   resources :password_resets,     only: [:new, :create, :edit, :update]
   resources :microposts,          only: [:create, :destroy]
 end
