@@ -50,6 +50,7 @@ Rails.application.configure do
   # config.force_ssl = true
 
   # For AWS
+  config.require_master_key = true
   config.secret_key_base = ENV['SECRET_KEY_BASE']
 
   # Use the lowest log level to ensure availability of diagnostic information
