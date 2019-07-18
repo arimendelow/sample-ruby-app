@@ -3,8 +3,9 @@ class AccountActivationController < ApplicationController
   def edit
     user = User.find_by(email: params[:email])
     # If the user exists, but is not activated, and the correct activation token is passed in...
+    $stdout.puts "user: #{!!user}"
     Rails.logger.debug "In the account_activation_controller.rb 'edit' action"
-    Rails.logger.debug "User: #{user}; user.autenticated?: #{user.authenticated?(:activation, params[:id])}"
+    Rails.logger.debug "User: #{user}; user.authenticated?: #{user.authenticated?(:activation, params[:id])}"
     if user && !user.activated? && user.authenticated?(:activation, params[:id])
       Rails.logger.info "Activating the user!"
       user.activate
@@ -12,6 +13,13 @@ class AccountActivationController < ApplicationController
       Rails.logger.info "Logging in the user!"
       log_in user
       flash[:success] = "Account activated!"
+      Rails.logger.info "Redirecting to the user's profile!"
+      redirect_to user
+    # if the user IS already activated
+    elsif user && user.activated? && user.authenticated?(:activation, params[:id])
+      Rails.logger.info "User already activated!"
+      log_in user
+      flash[:info] = "Account already activated!"
       Rails.logger.info "Redirecting to the user's profile!"
       redirect_to user
     else

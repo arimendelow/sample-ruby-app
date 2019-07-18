@@ -50,6 +50,7 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
     assert_not is_logged_in?
 
     # Valid token, wrong email
+    # debugger
     get edit_account_activation_path(user.activation_token, email: 'nischt email')
     assert_not is_logged_in?
 
