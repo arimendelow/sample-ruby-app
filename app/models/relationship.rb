@@ -11,4 +11,6 @@ class Relationship < ApplicationRecord
   user.active_relationship.create!(followed_id: other_user.id) | Creates an active relationship associated with 'user' (exception on failure)
   user.active_relationship.build(followed_id: other_user.id)   | Returns a new Relationship object associated with 'user'
   """
+  validates :follower_id, presence: true
+  validates :followed_id, presence: true
 end
