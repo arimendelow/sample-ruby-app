@@ -1,8 +1,7 @@
 
 # Ruby on Rails tutorial sample app!
 
-This is the third application for the [*Ruby on Rails Tutorial*](https://www.railstutorial.org/).
-
+[This sample application is live!](http://rails-sample-production.mnmsgae6r4.us-east-1.elasticbeanstalk.com)
 
 Once postgres is setup, before this can be run in production:
 * Run `/usr/local/Cellar/postgresql/11.3//bin/createuser -s postgres` to create a user called `postgres`
