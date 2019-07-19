@@ -19,3 +19,5 @@ To reset the database in Heroku:
 * Run `heroku pg:reset DATABASE` and then `heroku run rails db:migrate`
 
 To seed the test data from `db/seeds,rb`, run `run rails db:seed`
+
+To work with Rails in AWS EB, you need to SSH into the Elasic Beanstalk instance and cd to `/var/app/current/`. Then, you can run any command you'd run locally (you may need to run `sudo su` or chmod some files if you're having permissions issues).
