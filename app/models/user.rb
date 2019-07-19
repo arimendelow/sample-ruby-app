@@ -1,6 +1,9 @@
 class User < ApplicationRecord
   # 'dependent: :destroy' ensures that if a user is deleted, so are his corresponding microposts
   has_many :microposts, dependent: :destroy
+  # For following users - stored in the Relationship table, and the foreign key for a given user is the 'follower_id'
+  # Destroying a user should also destroy a user's relationships, hence the 'dependent: :destroy'
+  has_many :active_relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
   # Creates getter and setter methods corresponding to a user's 'remember_token' etc
   # This allows us to get and set a @remember_token instance variable
   attr_accessor :remember_token, :activation_token, :reset_token
