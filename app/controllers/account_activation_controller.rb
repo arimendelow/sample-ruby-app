@@ -3,7 +3,7 @@ class AccountActivationController < ApplicationController
   def edit
     user = User.find_by(email: params[:email])
     # If the user exists, but is not activated, and the correct activation token is passed in...
-    $stdout.puts "user: #{!!user}"
+    # $stdout.puts "user: #{!!user}"
     Rails.logger.debug "In the account_activation_controller.rb 'edit' action"
     if user && !user.activated? && user.authenticated?(:activation, params[:id])
       Rails.logger.info "Activating the user!"
