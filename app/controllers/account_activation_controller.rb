@@ -5,7 +5,6 @@ class AccountActivationController < ApplicationController
     # If the user exists, but is not activated, and the correct activation token is passed in...
     $stdout.puts "user: #{!!user}"
     Rails.logger.debug "In the account_activation_controller.rb 'edit' action"
-    Rails.logger.debug "User: #{user}; user.authenticated?: #{user.authenticated?(:activation, params[:id])}"
     if user && !user.activated? && user.authenticated?(:activation, params[:id])
       Rails.logger.info "Activating the user!"
       user.activate
