@@ -145,7 +145,7 @@ class User < ApplicationRecord
     Micropost.where("user_id = ?", id) # Could also just write 'microposts'
   end
 
-  # Follows a 
+  # Follows a user
   def follow(other_user)
     following << other_user
   end
