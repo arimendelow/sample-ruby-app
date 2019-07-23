@@ -3,9 +3,12 @@ class User < ApplicationRecord
   has_many :microposts, dependent: :destroy
   # For following users - stored in the Relationship table, and the foreign key for a given user is the 'follower_id'
   # Destroying a user should also destroy a user's relationships, hence the 'dependent: :destroy'
-  has_many :active_relationships, class_name: "Relationship",
-                                  foreign_key: "follower_id",
-                                  dependent: :destroy
+  has_many :active_relationships,   class_name: "Relationship",
+                                    foreign_key: "follower_id",
+                                    dependent: :destroy
+  has_many :passive_replationships, class_name: "Relationship",
+                                    foreign_key: "followed_id",
+                                    dependent: :destroy
   # Leads to a powerful combination of Active Record and array-like behavior.
   # For example, we can check if the followed users collection includes another user with the include? method,
   # or find objects through the association:
@@ -21,7 +24,10 @@ class User < ApplicationRecord
   # but in fact for efficiency Rails arranges for the comparison to happen directly in the database.
   # Also, Rails allows us to override the default, in this case using the source parameter,
   # which explicitly tells Rails that the source of the following array is the set of followed ids.
-  has_many :following, through: :active_relationships, source: :followed
+  has_many :following, through: :active_relationships,    source: :followed
+  # Here, we don't actually need the 'source' key, because in the case of a :followers attribute, Rails will singularize “followers” and automatically look for the foreign key follower_id in this case
+  # I've left it anyway to emphasize the parallel structure with the has_many :following association
+  has_many :followers, through: :passive_replationships,  source: :follower
   # Creates getter and setter methods corresponding to a user's 'remember_token' etc
   # This allows us to get and set a @remember_token instance variable
   attr_accessor :remember_token, :activation_token, :reset_token
