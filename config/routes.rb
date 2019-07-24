@@ -11,7 +11,12 @@ Rails.application.routes.draw do
   post    '/login'                          ,to: 'sessions#create'
   delete  '/logout'                         ,to: 'sessions#destroy'
   # Need this for CRUD operations on a given user - see the CRUD table for the provided actions
-  resources :users
+  resources :users do
+    # Makes it possible to have URLs such as /users/:id/following and /users/:id/followers
+    member do
+      get :following, :followers
+    end
+  end
   resources :account_activation,  only: [:edit]
   resources :password_resets,     only: [:new, :create, :edit, :update]
   resources :microposts,          only: [:create, :destroy]
