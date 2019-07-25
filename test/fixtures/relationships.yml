@@ -2,14 +2,14 @@ one:
   follower: ari
   followed: hamm
 
-one:
+two:
   follower: hamm
   followed: ari
 
-one:
+three:
   follower: ari
   followed: slink
 
-one:
+four:
   follower: potato
   followed: ari
