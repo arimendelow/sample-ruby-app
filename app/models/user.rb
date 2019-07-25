@@ -142,7 +142,11 @@ class User < ApplicationRecord
   def feed
     # The ? ensures that 'id' is properly escaped before being included in hte underlying SQL query, avoiding a security hole called SQL injection
     # ID here is just an integer, so there's no danger of SQL injection, but it's a good habit to always escape variables injected into SQL statements
-    Micropost.where("user_id = ?", id) # Could also just write 'microposts'
+    # We want the microposts IF the ID is that of a user that this user is following, or of himself
+    following_ids = "SELECT followed_id FROM relationships
+                     WHERE  follower_id = :user_id"
+    Micropost.where("user_id IN (#{following_ids})
+                     OR user_id = :user_id", user_id: id)
   end
 
   # Follows a user
