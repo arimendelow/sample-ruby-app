@@ -62,6 +62,7 @@ module SessionsHelper
 
   # Stores the location trying to be accessed
   def store_location
+    Rails.logger.info "Storing the location that the user is trying to access..."
     # Only store get requests
     session[:forwarding_url] = request.original_url if request.get?
   end

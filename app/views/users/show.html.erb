@@ -8,8 +8,12 @@
         <%= @user.name %>
       </h1>
     </section>
+    <section class="follow_stats">
+      <%= render 'shared/follow_stats' %>
+    </section>
   </aside>
   <div class="col-md-8">
+    <%= render 'follow_form' if logged_in? %>
     <!-- Make sure we don't just display an empty list -->
     <% if @user.microposts.any? %>
       <h3><%= @user.name %> has <%= @user.microposts.count %> microposts</h3>

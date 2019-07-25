@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
   # Restrict the filters to act only on the :edit and :update actions
-  before_action :logged_in_user,  only: [:edit, :update, :index, :destroy]
+  before_action :logged_in_user,  only: [:edit, :update, :index, :destroy, :following, :followers]
   before_action :correct_user,    only: [:edit, :update]
-  before_action :admin_user,    only: :destroy
+  before_action :admin_user,      only: :destroy
 
   def index
     # Only show activated users in the index
@@ -63,6 +63,20 @@ class UsersController < ApplicationController
     redirect_to users_url
   end
 
+  def following
+    @title = "Following"
+    @user  = User.find(params[:id])
+    @users = @user.following.paginate(page: params[:page])
+    render 'show_follow'
+  end
+
+  def followers
+    @title = "Followers"
+    @user  = User.find(params[:id])
+    @users = @user.followers.paginate(page: params[:page])
+    render 'show_follow'
+  end
+
   private
     # Returns a version of the 'params' hash with ONLY the permitted attributes, and raises an error if the :user attribute is missing
     def user_params
@@ -75,6 +89,7 @@ class UsersController < ApplicationController
     # Confirms a logged in user
     def logged_in_user
       unless logged_in?
+        store_location # This is defined in the sessions_helper
         flash[:danger] = "Please log in."
         redirect_to login_url
       end

@@ -1,6 +1,33 @@
 class User < ApplicationRecord
   # 'dependent: :destroy' ensures that if a user is deleted, so are his corresponding microposts
   has_many :microposts, dependent: :destroy
+  # For following users - stored in the Relationship table, and the foreign key for a given user is the 'follower_id'
+  # Destroying a user should also destroy a user's relationships, hence the 'dependent: :destroy'
+  has_many :active_relationships,   class_name: "Relationship",
+                                    foreign_key: "follower_id",
+                                    dependent: :destroy
+  has_many :passive_replationships, class_name: "Relationship",
+                                    foreign_key: "followed_id",
+                                    dependent: :destroy
+  # Leads to a powerful combination of Active Record and array-like behavior.
+  # For example, we can check if the followed users collection includes another user with the include? method,
+  # or find objects through the association:
+  #   user.following.include?(other_user)
+  #   user.following.find(other_user)
+  # We can also add and delete elements just as with arrays:
+  #   user.following << other_user (the shovel operator << appends to the end of an array)
+  #   user.following.delete(other_user)
+  # Although in many contexts we can effectively treat following as an array, Rails is smart
+  # about how it handles things under the hood. For example, code like
+  #   following.include?(other_user)
+  # looks like it might have to pull all the followed users out of the database to apply the include? method,
+  # but in fact for efficiency Rails arranges for the comparison to happen directly in the database.
+  # Also, Rails allows us to override the default, in this case using the source parameter,
+  # which explicitly tells Rails that the source of the following array is the set of followed ids.
+  has_many :following, through: :active_relationships,    source: :followed
+  # Here, we don't actually need the 'source' key, because in the case of a :followers attribute, Rails will singularize “followers” and automatically look for the foreign key follower_id in this case
+  # I've left it anyway to emphasize the parallel structure with the has_many :following association
+  has_many :followers, through: :passive_replationships,  source: :follower
   # Creates getter and setter methods corresponding to a user's 'remember_token' etc
   # This allows us to get and set a @remember_token instance variable
   attr_accessor :remember_token, :activation_token, :reset_token
@@ -116,6 +143,21 @@ class User < ApplicationRecord
     # The ? ensures that 'id' is properly escaped before being included in hte underlying SQL query, avoiding a security hole called SQL injection
     # ID here is just an integer, so there's no danger of SQL injection, but it's a good habit to always escape variables injected into SQL statements
     Micropost.where("user_id = ?", id) # Could also just write 'microposts'
+  end
+
+  # Follows a user
+  def follow(other_user)
+    following << other_user
+  end
+
+  # Unfollows a user
+  def unfollow(other_user)
+    following.delete(other_user)
+  end
+
+  # Determines if the user is following a specific user
+  def following?(other_user)
+    following.include?(other_user)
   end
 
   private

@@ -89,4 +89,32 @@ class UserTest < ActiveSupport::TestCase
     end
   end
 
+  test "should follow and unfollow a user" do
+    ari = users(:ari)
+    spaceman  = users(:spaceman)
+    assert_not ari.following?(spaceman)
+    ari.follow(spaceman)
+    assert ari.following?(spaceman)
+    assert spaceman.followers.include?(ari)
+    ari.unfollow(spaceman)
+    assert_not ari.following?(spaceman)
+  end
+
+  test "feed should have the right posts" do
+    ari = users(:ari)
+    hamm  = users(:hamm) # Ari is following Hamm, per the relationships fixture
+    potato    = users(:potato) # Ari is NOT following Potato, per the relationships fixture
+    # Posts from followed user
+    hamm.microposts.each do |post_following|
+      assert ari.feed.include?(post_following)
+    end
+    # Posts from self
+    ari.microposts.each do |post_self|
+      assert ari.feed.include?(post_self)
+    end
+    # Posts from unfollowed user
+    potato.microposts.each do |post_unfollowed|
+      assert_not ari.feed.include?(post_unfollowed)
+    end
+  end
 end
