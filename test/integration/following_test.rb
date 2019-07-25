@@ -40,6 +40,9 @@ class FollowingTest < ActionDispatch::IntegrationTest
 
   test "should follow a user with Ajax" do
     assert_difference '@user.following.count', 1 do
+      # xhr stands for XmlHttpRequest
+      # setting the xhr option to true issues an Ajax request in the test,
+      # which causes the respond_to block to execute the proper JavaScript method
       post relationships_path, xhr: true, params: { followed_id: @other_user.id }
     end
   end
@@ -56,6 +59,9 @@ class FollowingTest < ActionDispatch::IntegrationTest
     @user.follow(@other_user)
     relationship = @user.active_relationships.find_by(followed_id: @other_user.id)
     assert_difference '@user.following.count', -1 do
+      # xhr stands for XmlHttpRequest
+      # setting the xhr option to true issues an Ajax request in the test,
+      # which causes the respond_to block to execute the proper JavaScript method
       delete relationship_path(relationship), xhr: true
     end
   end
