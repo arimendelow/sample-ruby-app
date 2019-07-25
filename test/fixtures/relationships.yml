@@ -1,1 +1,15 @@
-# empty
+one:
+  follower: ari
+  followed: hamm
+
+one:
+  follower: hamm
+  followed: ari
+
+one:
+  follower: ari
+  followed: slink
+
+one:
+  follower: potato
+  followed: ari
