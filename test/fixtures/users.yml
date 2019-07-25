@@ -18,6 +18,27 @@ hamm:
   activated: true
   activated_at: <%= Time.zone.now %>
 
+slink:
+  name: Slinky Dog
+  email: elongate@spring.com
+  password_digest: <%= User.digest('password') %>
+  activated: true
+  activated_at: <%= Time.zone.now %>
+
+spaceman:
+  name: Buzz Lightbeer
+  email: gammaquadrant@sectorfour.com
+  password_digest: <%= User.digest('password') %>
+  activated: true
+  activated_at: <%= Time.zone.now %>
+
+potato:
+  name: Mr. Potato Head
+  email: picasso@oneeyedbart.com
+  password_digest: <%= User.digest('password') %>
+  activated: true
+  activated_at: <%= Time.zone.now %>
+
 <% 40.times do |n| %>
 # DO NOT indent the next 4 lines, or the users will not be created and we'll get lots of test errors
 user_<%= n %>:
